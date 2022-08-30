@@ -18,4 +18,4 @@ private val retrofit = module {
     }
 }
 
-val serviceModules = listOf(retrofit)
+val serviceModules = arrayOf(retrofit)

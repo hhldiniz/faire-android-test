@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/forecastInfoFragment">
+
+    <fragment
+        android:id="@+id/forecastInfoFragment"
+        android:name="com.hugo.fairecast.app.view.fragments.ForecastInfoFragment"
+        android:label="fragment_forecast_info"
+        tools:layout="@layout/fragment_forecast_info" />
+</navigation>
