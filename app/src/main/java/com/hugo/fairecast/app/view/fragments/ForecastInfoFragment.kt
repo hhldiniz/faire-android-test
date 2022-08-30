@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ForecastInfoFragment : Fragment() {
-    private val forecastInfoViewModel : ForecastInfoViewModel by viewModel()
+    private val forecastInfoViewModel: ForecastInfoViewModel by viewModel()
     private lateinit var binding: FragmentForecastInfoBinding
 
     override fun onCreateView(
@@ -31,8 +31,17 @@ class ForecastInfoFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 forecastInfoViewModel.getForecastByCityId(4418).collect {
-                    binding.presenter = ForecastPresentation(it?.weatherInfo?.get(0)?.weatherStateName ?: "")
-                    binding.executePendingBindings()
+                    it?.let {
+                        val weatherInfo = it.weatherInfo.first()
+                        binding.presenter = ForecastPresentation(
+                            it.title,
+                            weatherInfo.weatherStateName,
+                            weatherInfo.minTemp.toString(),
+                            weatherInfo.maxTemp.toString(),
+                            weatherInfo.theTemp.toString()
+                        )
+                        binding.executePendingBindings()
+                    }
                 }
             }
         }
