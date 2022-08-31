@@ -3,8 +3,17 @@ This project is a test for an Android position at Faire
 
 ## Trade offs
 * Project architecture
+
     This project uses Clean Architecture to organize it's classes, but this also means that a lot of boilerplate is necessary 
     in the beggining of the project, but this allows one to extend and maintain the project more easilly.
+* First-party Libraries 
+
+    Some 1st party libs were used to improve project maintainability and scalability like Jetpack Navigation and Databinding, but this also means that some initial time is necessary to setup classes and resources while it also increases the final package size (since it now has more dependencies in it).
+    
+* Delegate image loading to a 3rd party library
+
+    This project used Glide to load images. While it's a great tool and easy to use, it also breaks the code architecture a bit since it has it's own lifecycle
+
 ## How to run this project
 1. The easiest way to run this project is with Android Studio. Download it from google (https://developer.android.com/studio) 
 or install it from your system's package distribution platform.
