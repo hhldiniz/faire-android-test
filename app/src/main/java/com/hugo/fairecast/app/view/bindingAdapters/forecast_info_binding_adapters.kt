@@ -3,8 +3,11 @@ package com.hugo.fairecast.app.view.bindingAdapters
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hugo.fairecast.R
+import com.hugo.fairecast.app.view.adapters.WeatherNextDaysListAdapter
 import com.hugo.fairecast.app.view.states.ForecastInfoState
 
 @BindingAdapter("cityName")
@@ -74,4 +77,29 @@ fun setWeatherStateImg(view: ImageView, state: ForecastInfoState) {
                 state.presentation.weatherStateAbr
             )
         ).into(view)
+}
+
+@BindingAdapter("stateImgWithAbbr")
+fun setWeatherStateImg(view: ImageView, weatherStateAbbr: String) {
+    Glide.with(view).load(
+        view.context.getString(
+            R.string.weather_state_img_url,
+            weatherStateAbbr
+        )
+    ).into(view)
+}
+
+@BindingAdapter("items")
+fun setListItems(view: RecyclerView, state: ForecastInfoState) {
+    val adapter = WeatherNextDaysListAdapter()
+    view.layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
+    view.adapter = adapter
+    when (state) {
+        is ForecastInfoState.Success -> {
+            adapter.setItems(state.presentation.nextDaysPresentation)
+        }
+        is ForecastInfoState.Empty -> adapter.setItems(emptyList())
+        is ForecastInfoState.Error -> adapter.setItems(emptyList())
+        is ForecastInfoState.Loading -> adapter.setItems(emptyList())
+    }
 }
