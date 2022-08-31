@@ -9,4 +9,5 @@
     <string name="empty_data">-</string>
     <string name="weather_state_img_url">https://cdn.faire.com/static/mobile-take-home/icons/%s.png</string>
     <string name="next_days_label">Next Days</string>
+    <string name="today">Today</string>
 </resources>

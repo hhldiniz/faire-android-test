@@ -9,6 +9,10 @@ import com.bumptech.glide.Glide
 import com.hugo.fairecast.R
 import com.hugo.fairecast.app.view.adapters.WeatherNextDaysListAdapter
 import com.hugo.fairecast.app.view.states.ForecastInfoState
+import com.hugo.fairecast.domain.models.DayOfWeek
+import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.*
 
 @BindingAdapter("cityName")
 fun setCityName(view: TextView, state: ForecastInfoState) {
@@ -101,5 +105,19 @@ fun setListItems(view: RecyclerView, state: ForecastInfoState) {
         is ForecastInfoState.Empty -> adapter.setItems(emptyList())
         is ForecastInfoState.Error -> adapter.setItems(emptyList())
         is ForecastInfoState.Loading -> adapter.setItems(emptyList())
+    }
+}
+
+@BindingAdapter("dateAsDay")
+fun setDayFromDate(view: TextView, dateString: String) {
+    try {
+        val date = SimpleDateFormat("yyyy-MM-DD", Locale.getDefault()).parse(dateString)
+        val calendar = Calendar.getInstance()
+        date?.let {
+            calendar.time = date
+            view.text = DayOfWeek.fromDayIndex(calendar.get(Calendar.DAY_OF_WEEK)).day
+        }
+    }catch (e: Exception) {
+        view.text = ""
     }
 }

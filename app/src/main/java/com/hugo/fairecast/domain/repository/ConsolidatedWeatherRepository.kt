@@ -34,7 +34,8 @@ class ConsolidatedWeatherRepository(
                                     nextDaysInfo.minTemp,
                                     nextDaysInfo.maxTemp,
                                     nextDaysInfo.theTemp,
-                                    nextDaysInfo.weatherStateAbbr
+                                    nextDaysInfo.weatherStateAbbr,
+                                    nextDaysInfo.applicableDate
                                 )
                             }
                         )

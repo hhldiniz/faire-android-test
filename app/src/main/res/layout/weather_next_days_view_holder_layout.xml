@@ -20,7 +20,7 @@
             android:layout_marginTop="8dp"
             android:contentDescription="@string/weather_state_image_content_description"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/day"
             app:stateImgWithAbbr="@{nextDaysForecastPresentation.weatherStateAbr}"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -29,12 +29,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:text="@{@string/temp(nextDaysForecastPresentation.theTemp)}"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/weatherStateImg"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/weatherStateImg"
             tools:text="@string/temp" />
 
         <TextView
@@ -70,5 +69,16 @@
             app:layout_constraintEnd_toEndOf="@+id/weatherStateImg"
             app:layout_constraintStart_toStartOf="@+id/weatherStateImg"
             app:layout_constraintTop_toBottomOf="@+id/weatherStateImg" />
+
+        <TextView
+            android:id="@+id/day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            tools:text="@string/today"
+            app:dateAsDay="@{nextDaysForecastPresentation.forecastDate}"
+            app:layout_constraintEnd_toEndOf="@+id/weatherStateImg"
+            app:layout_constraintStart_toStartOf="@+id/weatherStateImg"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

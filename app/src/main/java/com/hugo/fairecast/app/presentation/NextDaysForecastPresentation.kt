@@ -6,4 +6,5 @@ class NextDaysForecastPresentation(
     val maxTemp: Float,
     val theTemp: Float,
     val weatherStateAbr: String,
+    val forecastDate: String
 )
