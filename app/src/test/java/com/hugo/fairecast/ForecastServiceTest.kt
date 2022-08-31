@@ -2,6 +2,7 @@ package com.hugo.fairecast
 
 import com.hugo.fairecast.data.services.ForecastService
 import com.hugo.fairecast.modules.serviceModules
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -19,14 +20,14 @@ class ForecastServiceTest : KoinTest{
     private val service: ForecastService by inject()
 
     @Test
-    fun forecastServiceReturnIsValid() {
+    fun forecastServiceReturnIsValid() = runBlocking {
         startKoin {
             modules(
-                serviceModules
+                *serviceModules
             )
         }
 
-        val response = service.listRepos(4418).execute() // Toronto Id
+        val response = service.listRepos(4418) // Toronto Id
         assertEquals(response.isSuccessful, true)
     }
 }
