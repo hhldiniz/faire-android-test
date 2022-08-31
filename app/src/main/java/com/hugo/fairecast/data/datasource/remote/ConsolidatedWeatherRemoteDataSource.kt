@@ -9,5 +9,5 @@ class ConsolidatedWeatherRemoteDataSource(
 ) : ConsolidatedWeatherDataSource {
 
     override suspend fun getForecastByCityId(id: Int) =
-        flow { emit(service.listRepos(id).body()) }
+        flow { emit(service.listRepos(id)) }
 }

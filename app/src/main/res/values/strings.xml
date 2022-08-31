@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">fairecast</string>
     <string name="weather_state_image_content_description">Weather condition %s</string>
+    <string name="low_temp">L. %.0fª</string>
+    <string name="high_temp">H. %.0fª</string>
+    <string name="temp">%.0fº</string>
+    <string name="load_info_error">Error while fetching data: %s</string>
+    <string name="loading">Loading…</string>
+    <string name="empty_data">-</string>
+    <string name="weather_state_img_url">https://cdn.faire.com/static/mobile-take-home/icons/%s.png</string>
 </resources>

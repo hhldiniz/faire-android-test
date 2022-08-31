@@ -4,8 +4,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
-            name="presenter"
-            type="com.hugo.fairecast.app.presentation.ForecastPresentation" />
+            name="state"
+            type="com.hugo.fairecast.app.view.states.ForecastInfoState" />
+        <import type="com.hugo.fairecast.app.view.states.ForecastInfoState"/>
+        <import type="android.view.View"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,21 +19,25 @@
             android:id="@+id/cityName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@{presenter.cityName}"
+            app:cityName="@{state}"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.08"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="City Name" />
 
         <ImageView
             android:id="@+id/stateImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginTop="32dp"
             android:contentDescription="@string/weather_state_image_content_description"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/cityName"
+            app:stateImg="@{state}"
             tools:src="@tools:sample/avatars" />
 
         <TextView
@@ -40,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             tools:text="Light Rain"
-            android:text="@{presenter.weatherState}"
+            app:weatherState="@{state}"
             app:layout_constraintEnd_toEndOf="@+id/stateImage"
             app:layout_constraintStart_toStartOf="@+id/stateImage"
             app:layout_constraintTop_toBottomOf="@+id/stateImage" />
@@ -50,29 +56,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            tools:text="L. 11ª"
-            android:text="@{presenter.minTemp}"
-            app:layout_constraintEnd_toStartOf="@+id/weatherState"
-            app:layout_constraintTop_toBottomOf="@+id/weatherState" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/weatherState"
+            app:minTemp="@{state}"
+            tools:text="L. 11º" />
 
         <TextView
             android:id="@+id/highTemp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            tools:text="H. 17ª"
-            android:text="@{presenter.maxTemp}"
-            app:layout_constraintStart_toEndOf="@+id/weatherState"
-            app:layout_constraintTop_toBottomOf="@+id/weatherState" />
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/lowTemp"
+            app:layout_constraintTop_toBottomOf="@+id/weatherState"
+            app:maxTemp="@{state}"
+            tools:text="H. 17º" />
 
         <TextView
             android:id="@+id/temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{presenter.theTemp}"
+            android:textSize="48sp"
             app:layout_constraintBottom_toBottomOf="@+id/stateImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/stateImage"
-            app:layout_constraintTop_toTopOf="@+id/stateImage" />
+            app:layout_constraintTop_toTopOf="@+id/stateImage"
+            app:temp="@{state}"
+            tools:text="16º" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
@@ -80,7 +92,27 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintGuide_begin="202dp"
+            app:layout_constraintGuide_begin="226dp"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/errorMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:visibility="@{state instanceof ForecastInfoState.Error ? View.VISIBLE : View.GONE}"
+            errorMsg="@{state}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/highTemp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_begin="178dp"
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
