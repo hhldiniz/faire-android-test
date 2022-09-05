@@ -4,8 +4,7 @@ import com.hugo.fairecast.app.presentation.ForecastPresentation
 import com.hugo.fairecast.app.presentation.NextDaysForecastPresentation
 import com.hugo.fairecast.app.view.states.ForecastInfoState
 import com.hugo.fairecast.data.datasource.remote.ConsolidatedWeatherRemoteDataSource
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 
 class ConsolidatedWeatherRepository(
     private val consolidatedWeatherRemoteDataSource: ConsolidatedWeatherRemoteDataSource
@@ -45,6 +44,8 @@ class ConsolidatedWeatherRepository(
             } else {
                 ForecastInfoState.Error(it.message())
             }
+        }.catch { e->
+            emit(ForecastInfoState.Error(e.message ?: "Error while fetching data from the server"))
         }
     }
 }

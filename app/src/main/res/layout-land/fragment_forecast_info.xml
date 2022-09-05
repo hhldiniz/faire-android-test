@@ -27,6 +27,7 @@
             app:layout_constraintHorizontal_bias="0.08"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:visibility="@{state instanceof ForecastInfoState.Error ? View.INVISIBLE : View.VISIBLE}"
             tools:text="City Name" />
 
         <ImageView
@@ -38,6 +39,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/day"
             app:stateImg="@{state}"
+            android:visibility="@{state instanceof ForecastInfoState.Error ? View.INVISIBLE : View.VISIBLE}"
             tools:src="@tools:sample/avatars" />
 
         <TextView
@@ -49,6 +51,7 @@
             app:layout_constraintEnd_toStartOf="@+id/stateImage"
             app:layout_constraintTop_toTopOf="@+id/stateImage"
             app:weatherState="@{state}"
+            android:visibility="@{state instanceof ForecastInfoState.Error ? View.INVISIBLE : View.VISIBLE}"
             tools:text="Light Rain" />
 
         <TextView
@@ -59,6 +62,7 @@
             app:layout_constraintStart_toEndOf="@+id/stateImage"
             app:layout_constraintTop_toBottomOf="@+id/temp"
             app:minTemp="@{state}"
+            android:visibility="@{state instanceof ForecastInfoState.Error ? View.INVISIBLE : View.VISIBLE}"
             tools:text="L. 11º" />
 
         <TextView
@@ -69,6 +73,7 @@
             app:layout_constraintStart_toEndOf="@+id/lowTemp"
             app:layout_constraintTop_toBottomOf="@+id/temp"
             app:maxTemp="@{state}"
+            android:visibility="@{state instanceof ForecastInfoState.Error ? View.INVISIBLE : View.VISIBLE}"
             tools:text="H. 17º" />
 
         <TextView
@@ -82,6 +87,7 @@
             app:layout_constraintStart_toEndOf="@+id/stateImage"
             app:layout_constraintTop_toTopOf="@+id/stateImage"
             app:temp="@{state}"
+            android:visibility="@{state instanceof ForecastInfoState.Error ? View.INVISIBLE : View.VISIBLE}"
             tools:text="16º" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -92,17 +98,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintGuide_begin="366dp"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/errorMsg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:visibility="@{state instanceof ForecastInfoState.Error ? View.VISIBLE : View.GONE}"
-            errorMsg="@{state}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/highTemp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"
@@ -122,6 +117,7 @@
             android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             app:items="@{state}"
+            android:visibility="@{state instanceof ForecastInfoState.Error ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -137,6 +133,7 @@
             android:text="@string/next_days_label"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:visibility="@{state instanceof ForecastInfoState.Error ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lowTemp" />
 
@@ -146,9 +143,45 @@
             android:layout_height="wrap_content"
             android:text="@string/today"
             android:textSize="16sp"
+            android:visibility="@{state instanceof ForecastInfoState.Error ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="@+id/stateImage"
             app:layout_constraintStart_toStartOf="@+id/stateImage"
             app:layout_constraintTop_toBottomOf="@+id/cityName" />
+
+        <TextView
+            android:id="@+id/errorLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/error_label"
+            android:textColor="@android:color/holo_red_dark"
+            android:textStyle="bold"
+            android:visibility="@{state instanceof ForecastInfoState.Error ? View.VISIBLE : View.GONE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nextDaysTxt" />
+
+        <TextView
+            android:id="@+id/errorMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:visibility="@{state instanceof ForecastInfoState.Error ? View.VISIBLE : View.GONE}"
+            errorMsg="@{state}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/errorLabel" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{state instanceof ForecastInfoState.Loading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
